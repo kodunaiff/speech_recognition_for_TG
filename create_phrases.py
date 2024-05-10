@@ -1,8 +1,13 @@
 import json
 
 from environs import Env
+from google.api_core.exceptions import InvalidArgument
 from google.cloud import dialogflow
+import logging
 
+
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    level=logging.INFO)
 
 def create_intent(project_id, display_name, training_phrases_parts, message_texts):
     """Create an intent of the given intent type."""
@@ -46,8 +51,13 @@ def main():
 
     path = "questions.json"
     training_phrases = open_file(path)
-    for phrase in training_phrases:
-        create_intent(project_id, phrase, training_phrases[phrase]['questions'], (training_phrases[phrase]['answer']), )
+    for intent, phrase in training_phrases.items():
+        questions, answer = phrase.values()
+        try:
+            create_intent(project_id, intent, questions, (answer,))
+        except InvalidArgument as error:
+            logging.error(error)
+            continue
 
 
 if __name__ == '__main__':

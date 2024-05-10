@@ -157,7 +157,6 @@ new_parse.py
 main3.py
 parse_2.py
 downl_func.py
-tg_bot.py
 title_p.py
 library.json
 prov.py
@@ -168,3 +167,5 @@ ggt.py
 main_2.py
 create_intent.py
 credentials.json
+add_api_keys_2.py
+questions.json

@@ -18,7 +18,7 @@ def detect_intent_texts(texts, project_id, session_id):
     response = session_client.detect_intent(
         request={"session": session, "query_input": query_input}
     )
-    return response.query_result.fulfillment_text
+    return response.query_result.fulfillment_text, response.query_result.intent.is_fallback
 
 def echo(event, vk_api):
     vk_api.messages.send(
@@ -30,13 +30,14 @@ def echo(event, vk_api):
 def get_dialogue(event, vk_api, project_id):
     user_id = event.user_id
     text = event.text
-    reply_text = detect_intent_texts(text, project_id, user_id)
+    reply_text, is_fallback = detect_intent_texts(text, project_id, user_id)
+    if not is_fallback:
 
-    vk_api.messages.send(
-        user_id=user_id,
-        message=reply_text,
-        random_id=random.randint(1, 1000)
-        )
+        vk_api.messages.send(
+            user_id=user_id,
+            message=reply_text,
+            random_id=random.randint(1, 1000)
+            )
 
 if __name__ == "__main__":
     env = Env()

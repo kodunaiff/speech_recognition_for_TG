@@ -5,9 +5,9 @@ from google.api_core.exceptions import InvalidArgument
 from google.cloud import dialogflow
 import logging
 
-
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
+
 
 def create_intent(project_id, display_name, training_phrases_parts, message_texts):
     """Create an intent of the given intent type."""

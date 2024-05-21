@@ -1,3 +1,4 @@
+import argparse
 import json
 
 from environs import Env
@@ -7,6 +8,15 @@ import logging
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
+
+
+def specify_path_file():
+    parser = argparse.ArgumentParser(
+        description='Скрипт для обучения новым фразам'
+    )
+    parser.add_argument('filename', help='path to file', nargs='?', type=str, default='questions.json')
+    args = parser.parse_args()
+    return args.filename
 
 
 def create_intent(project_id, display_name, training_phrases_parts, message_texts):
@@ -49,7 +59,7 @@ def main():
     env.read_env()
     project_id = env.str("PROJECT_ID")
 
-    path = "questions.json"
+    path = specify_path_file()
     training_phrases = open_file(path)
     for intent, phrase in training_phrases.items():
         questions, answer = phrase.values()

@@ -37,6 +37,12 @@ GOOGLE_APPLICATION_CREDENTIALS = путь до файла credentials.json
 
 ~~~
 
+## Обучение ботов с помощью DialogFlow
+
+На примере файла **questions.json** создайте  json файл, так вы можете
+натренировать бота. Для этого 
+вам понадобится скрипт `create_phrases.py`.
+
 ## Пример запуска
 
 ~~~

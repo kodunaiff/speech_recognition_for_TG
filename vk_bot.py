@@ -7,7 +7,7 @@ from environs import Env
 from telegram.ext import Updater
 from vk_api.longpoll import VkLongPoll, VkEventType
 
-from checked_result import TelegramLogsHandler
+from helpers import TelegramLogsHandler
 from d_f_handler import detect_intent_texts
 
 logger = logging.getLogger()

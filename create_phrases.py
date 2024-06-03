@@ -6,8 +6,7 @@ from google.api_core.exceptions import InvalidArgument
 from google.cloud import dialogflow
 import logging
 
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+logger = logging.getLogger()
 
 
 def specify_path_file():
@@ -47,8 +46,8 @@ def create_intent(project_id, display_name, training_phrases_parts, message_text
 
 
 def open_file(path):
-    with open(path, "r", encoding="UTF-8") as my_file:
-        file_contents = my_file.read()
+    with open(path, "r", encoding="UTF-8") as file:
+        file_contents = file.read()
 
     training_phrases = json.loads(file_contents)
     return training_phrases
@@ -66,7 +65,7 @@ def main():
         try:
             create_intent(project_id, intent, questions, (answer,))
         except InvalidArgument as error:
-            logging.error(error)
+            logger.error(error)
             continue
 
 

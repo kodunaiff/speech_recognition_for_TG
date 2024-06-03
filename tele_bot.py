@@ -4,7 +4,7 @@ from environs import Env
 from telegram import Update
 from telegram.ext import Updater, CallbackContext, CommandHandler, MessageHandler, Filters
 
-from checked_result import TelegramLogsHandler
+from helpers import TelegramLogsHandler
 from d_f_handler import detect_intent_texts
 
 logger = logging.getLogger()
